@@ -1,6 +1,7 @@
 import os
 import openai
 from openai import OpenAI
+import time
 
 client = OpenAI()
 client.api_key = os.environ.get('OPENAI_API_KEY')
@@ -26,6 +27,7 @@ run = client.beta.threads.runs.create(
   instructions="Please address the user as Dhawan Solanki. The user has a premium account."
 )
 
+time.sleep(20)
 run = client.beta.threads.runs.retrieve(
   thread_id=thread.id,
   run_id=run.id
@@ -36,4 +38,5 @@ messages = client.beta.threads.messages.list(
   thread_id=thread.id
 )
 
-print("Message Received is : ",messages)
+for message in reversed(messages.data):
+    print(message.role + ": " + message.content[0].text.value)
