@@ -18,7 +18,7 @@ thread = client.beta.threads.create()
 message = client.beta.threads.messages.create(
     thread_id=thread.id,
     role="user",
-    content="A boy playing guitar on beach during sunset."
+    content="A boy playing guitar on beach during sunset. Is it possible?"
 )
 
 run = client.beta.threads.runs.create(
